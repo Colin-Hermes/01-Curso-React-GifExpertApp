@@ -1,31 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import GifExpertApp from './GifExpertApp'
-import {getGifs} from '../helpers/getGifs.js'
 import { GifGriditem } from './GifGriditem.jsx';
+import { useFetchGifs } from '../hooks/useFetchGifs.js';
 
 export const GifGrid = ({categories}) => {
   
-      const [images,setImages] = useState([]);
-
-      //El useEffect sirve para disparar efectos secundarios(codigo)
-
-      const getImages = async() => {
-        const newImages = await getGifs(categories);
-        setImages(newImages)
-      }
-
-      useEffect(() =>{
-        getImages();
+  const {images , isLoading} = useFetchGifs(categories);
+  console.log(images,isLoading);
   
-      },[])
 
       
       return (
    
       <>
-      <h2>{categories}</h2>
+      <h2 className='categoria'>{categories}</h2>
+
+      {
+        isLoading && (<h2>Cargando...</h2>)
+      }
       
-      <div className='galeria '>
+      <div className='galeria'>
         {images.map(image =>
           (<GifGriditem 
             key={image.id}

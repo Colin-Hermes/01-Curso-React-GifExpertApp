@@ -21,6 +21,7 @@ export default function Addcategories({onNewCategory: onAddCategory}) {//me func
   return (
     <form onSubmit={onSubmit}>
         <input 
+        className="input-principal"
         type="text" 
         placeholder="Buscar gifs"
         value={inputValue}

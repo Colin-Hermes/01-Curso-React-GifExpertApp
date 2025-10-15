@@ -1,0 +1,28 @@
+import { useEffect, useState } from "react";
+import { getGifs } from "../helpers/getGifs";
+
+
+export const useFetchGifs = (categories) => {
+
+     const [images,setImages] = useState([]);
+     const [isLoading, setIsLoading] = useState(true);
+      //El useEffect sirve para disparar efectos secundarios(codigo)
+
+      const getImages = async() => {
+        const newImages = await getGifs(categories);
+        setImages(newImages);
+        setIsLoading(false);
+      }
+
+      useEffect(() =>{
+        getImages();
+  
+      },[])
+
+  return {
+    images,
+    isLoading
+  }
+}
+
+ 
